@@ -7,22 +7,15 @@ const clearAllBtn = document.querySelector('#input-clear-all');
 const btnSubmit = document.querySelector('#btn-submit');
 let inputDataValuesLeft = [];
 let inputDataValuesRight = [];
-let formValueArray = [];
-let formValue = '';
+let operator = '';
 let valueLeft = '';
 let valueRight = '';
-let operator = '';
-let operatorType = '';
-let output = '';
+let output;
 let inputLeft = true;
 let inputRight = false;
 let operatorActive = true;
 
 formControl.addEventListener('keyup', validateInput);
-
-// inputValueBtn.forEach(btn => {
-//     btn.addEventListener('click', getData);
-// });
 
 for (let btn of inputValueBtn) {
     btn.addEventListener('click', getData);
@@ -32,32 +25,15 @@ for (let btn of operatorBtn) {
     btn.addEventListener('click', getOperator);
 }
 
-// operatorBtn.forEach(btn => {
-//     btn.addEventListener('click', getOperator);
-// });
-
 clearBtn.addEventListener('click', clearData);
 clearAllBtn.addEventListener('click', clearDataAll);
 btnSubmit.addEventListener('click', calculateAll);
 
-console.log(inputLeft)
-
 function getOperator(e) {
     e.preventDefault();
-
-    operatorType = e.target.innerText;
-
-    operator = operatorType;
-
-    formValue = valueLeft + operator;
-    formControl.value = formValue;
-    console.log(valueLeft)
-
-    console.log(operator)
-    console.log(operatorActive)
-
+    operator = e.target.innerText;
+    formControl.value = valueLeft + operator;
     return inputLeft = false, operatorActive = false;
-
 }
 
 function getData(e) {
@@ -65,82 +41,51 @@ function getData(e) {
 
     if (inputLeft) {
         inputDataValuesLeft.push(e.target.innerText);
-
-        // return inputLeft = false;
         valueLeft = inputDataValuesLeft.join('');
-
-        console.log(valueLeft);
-        console.log(inputDataValuesLeft);
+        formControl.value = valueLeft;
     }
 
     if (!operatorActive) {
-        console.log('enter right values')
-
         inputDataValuesRight.push(e.target.innerText);
-
         valueRight = inputDataValuesRight.join('');
-
-        console.log(inputDataValuesRight)
-
-        console.log(valueRight)
+        formControl.value = valueLeft + operator + valueRight;
     }
 
-    formValue = valueLeft + operator + valueRight;
-    formControl.value = formValue;
 }
 
 function clearData(e) {
     e.preventDefault();
 
-    if (inputLeft && inputDataValuesLeft.length > 0) {
+    if (inputLeft) {
         inputDataValuesLeft.pop();
-
         valueLeft = inputDataValuesLeft.join('');
-
-        console.log(inputDataValuesLeft);
-        console.log(formValue)
-        console.log(operatorActive)
-
         formControl.value = valueLeft;
 
-        return inputLeft;
+        if (!operatorActive && !inputLeft) {
+            valueLeft = inputDataValuesLeft.join('');
+            formControl.value = valueLeft;
+
+            operatorActive = true;
+            inputLeft = true;
+            inputRight = true;
+        }
 
     }
 
-    if (!operatorActive && inputLeft) {
-        inputDataValuesLeft.pop();
-
-        valueLeft = inputDataValuesLeft.join('');
-
-        console.log(valueLeft)
-        console.log(inputDataValuesLeft)
-
-    }
 
     if (!operatorActive && !inputLeft) {
         inputDataValuesRight.pop();
-
-        valueRight = valueLeft + inputDataValuesRight.join('');
-
-        formControl.value = valueRight;
-
-
-        console.log(valueRight + ' from rightPOP')
-
-        console.log(inputDataValuesRight)
-        console.log(valueRight)
-        console.log(operatorActive)
-
-        return operatorActive = false, inputLeft;
+        valueRight = inputDataValuesRight.join('');
+        formControl.value = valueLeft + operator + valueRight;
+        inputRight = true;
     }
-
 }
 
 function clearDataAll(e) {
     e.preventDefault();
     reset();
-    formControl.value = '';
-
+    formControl.value = 0;
+    inputInfo.innerHTML = '&nbsp;';
 }
 
 function calculateAll(e) {
@@ -152,22 +97,26 @@ function calculateAll(e) {
 
     if (computingOperator === '+') {
         output = param1 + param2;
-        formControl.value = formValue + '=' + output;
+        formControl.value = '=' + output;
+        inputInfo.innerHTML = param1 + '+' + param2;
         reset();
 
     } else if (computingOperator === '-') {
         output = param1 - param2;
-        formControl.value = formValue + '=' + output;
+        inputInfo.innerHTML = param1 + '-' + param2;
+        formControl.value = '=' + output;
         reset();
 
     } else if (computingOperator === '*') {
         output = param1 * param2;
-        formControl.value = formValue + '=' + output;
+        inputInfo.innerHTML = param1 + '*' + param2;
+        formControl.value = '=' + output;
         reset();
 
     } else if (computingOperator === '/') {
         output = param1 / param2;
-        formControl.value = formValue + '=' + output;
+        inputInfo.innerHTML = param1 + '/' + param2;
+        formControl.value = '=' + output;
         reset();
     } else {
         formControl.value = '';
@@ -178,13 +127,10 @@ function calculateAll(e) {
 function reset() {
     valueLeft = '';
     valueRight = '';
-    formValue = '';
     operator = '';
-    operatorType = '';
     inputDataValuesLeft = [];
     inputDataValuesRight = [];
     inputLeft = true;
-    inputRight = false;
     operatorActive = true;
 }
 
@@ -195,13 +141,5 @@ function validateInput() {
     if (!regexAlphabet) {
         reset();
         formControl.value = '';
-    }
-
-
-}
-
-function checkOperatorType(type) {
-    if (type === '+' && type === '-' && type === '*' && type === '/') {
-        return false;
     }
 }
