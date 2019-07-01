@@ -1,10 +1,10 @@
-const inputInfo = document.querySelector('[data-input-info]');
-const formControl = document.querySelector('[data-form-control]');
-const inputValueBtn = document.querySelectorAll('[data-input]');
-const operatorBtn = document.querySelectorAll('[data-operator]');
-const clearBtn = document.querySelector('[data-clear]');
-const clearAllBtn = document.querySelector('[data-clear-all]');
-const btnSubmit = document.querySelector('[data-submit]');
+const inputInfo = document.querySelector('#input-info');
+const formControl = document.querySelector('#form-input');
+const inputValueBtn = document.querySelectorAll('.data-input-btn');
+const operatorBtn = document.querySelectorAll('.data-input-operator');
+const clearBtn = document.querySelector('#input-clear');
+const clearAllBtn = document.querySelector('#input-clear-all');
+const btnSubmit = document.querySelector('#btn-submit');
 let inputDataValuesLeft = [];
 let inputDataValuesRight = [];
 let formValueArray = [];
@@ -20,13 +20,21 @@ let operatorActive = true;
 
 formControl.addEventListener('keyup', validateInput);
 
-inputValueBtn.forEach(btn => {
-    btn.addEventListener('click', getData);
-});
+// inputValueBtn.forEach(btn => {
+//     btn.addEventListener('click', getData);
+// });
 
-operatorBtn.forEach(btn => {
+for (let btn of inputValueBtn) {
+    btn.addEventListener('click', getData);
+}
+
+for (let btn of operatorBtn) {
     btn.addEventListener('click', getOperator);
-});
+}
+
+// operatorBtn.forEach(btn => {
+//     btn.addEventListener('click', getOperator);
+// });
 
 clearBtn.addEventListener('click', clearData);
 clearAllBtn.addEventListener('click', clearDataAll);
