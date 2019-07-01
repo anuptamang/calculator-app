@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Calculator App</title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <style>
+      .container {
+        width: 300px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container py-5">
+      <h1 class="mb-4">Calculator</h1>
+      <div class="row mx-n-1" data-calculation-app>
+        <div class="col-12 px-1 mb-2">
+          <label class="text-info" data-input-info>&nbsp;</label>
+          <input
+            type="text"
+            class="form-control border-info bg-info text-white"
+            value=""
+            data-form-control
+          />
+        </div>
+        <div class="col-6 px-1 mb-2">
+          <a
+            href="#"
+            class="btn btn-primary btn-warning btn-block"
+            data-clear-all
+            >AC</a
+          >
+        </div>
+        <div class="col-3 px-1 mb-2">
+          <a href="#" class="btn btn-primary btn-warning btn-block" data-clear
+            >C</a
+          >
+        </div>
+        <div class="col-3 px-1 mb-2">
+          <a href="#" class="btn btn-info btn-block" data-operator>/</a>
+        </div>
+        <div class="col-3 px-1 mb-2">
+          <a href="#" class="btn btn-secondary btn-block" data-input>9</a>
+        </div>
+        <div class="col-3 px-1 mb-2">
+          <a href="#" class="btn btn-secondary btn-block" data-input>8</a>
+        </div>
+        <div class="col-3 px-1 mb-2">
+          <a href="#" class="btn btn-secondary btn-block" data-input>7</a>
+        </div>
+        <div class="col-3 px-1 mb-2">
+          <a href="#" class="btn btn-info btn-block" data-operator>+</a>
+        </div>
+        <div class="col-3 px-1 mb-2">
+          <a href="#" class="btn btn-secondary btn-block" data-input>6</a>
+        </div>
+        <div class="col-3 px-1 mb-2">
+          <a href="#" class="btn btn-secondary btn-block" data-input>5</a>
+        </div>
+        <div class="col-3 px-1 mb-2">
+          <a href="#" class="btn btn-secondary btn-block" data-input>4</a>
+        </div>
+        <div class="col-3 px-1 mb-2">
+          <a href="#" class="btn btn-info btn-block" data-operator>-</a>
+        </div>
+        <div class="col-3 px-1 mb-2">
+          <a href="#" class="btn btn-secondary btn-block" data-input>3</a>
+        </div>
+        <div class="col-3 px-1 mb-2">
+          <a href="#" class="btn btn-secondary btn-block" data-input>2</a>
+        </div>
+        <div class="col-3 px-1 mb-2">
+          <a href="#" class="btn btn-secondary btn-block" data-input>1</a>
+        </div>
+        <div class="col-3 px-1 mb-2">
+          <a href="#" class="btn btn-info btn-block" data-operator>*</a>
+        </div>
+        <div class="col-3 px-1 mb-2">
+          <a href="#" class="btn btn-secondary btn-block" data-input>0</a>
+        </div>
+        <div class="col-3 px-1 mb-2">
+          <a href="#" class="btn btn-secondary btn-block" data-input>.</a>
+        </div>
+        <div class="col-6 px-1 mb-2">
+          <a href="#" class="btn btn-success btn-block" data-submit>Enter</a>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="./build/app.bundle.js"></script>
+</html>
